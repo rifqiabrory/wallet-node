@@ -1,20 +1,20 @@
 module.exports = function(app){
     const Wallet = require('../controller/wallet-controller');
-    //set url
-    const URL_NEW_WALLET = '/wallet';
-    const URL_WALLET_DETAIL = '/wallet/:idWallet';
-    const URL_WALLET_UPDATE = '/wallet/:idWallet';
-    const URL_WALLET_DELETE = '/wallet/:idWallet';
-    const URL_WALLETS_BY_ACCOUNT_NUMBER = '/wallets/:accountNumber';
+    //set URI_REQUEST
+    const URI_REQUEST_NEW_WALLET = '/wallet';
+    const URI_REQUEST_WALLET_DETAIL = '/wallet/:idWallet';
+    const URI_REQUEST_WALLET_UPDATE = '/wallet/:idWallet';
+    const URI_REQUEST_WALLET_DELETE = '/wallet/:idWallet';
+    const URI_REQUEST_WALLETS_BY_ACCOUNT_NUMBER = '/wallets/:accountNumber';
     // set route
-    app.route(URL_WALLETS_BY_ACCOUNT_NUMBER)
+    app.route(URI_REQUEST_WALLETS_BY_ACCOUNT_NUMBER)
         .get(Wallet.lists);
-    app.route(URL_WALLET_DETAIL)
+    app.route(URI_REQUEST_WALLET_DETAIL)
         .get(Wallet.detail);
-    app.route(URL_NEW_WALLET)
+    app.route(URI_REQUEST_NEW_WALLET)
         .post(Wallet.create);
-    app.route(URL_WALLET_UPDATE)
+    app.route(URI_REQUEST_WALLET_UPDATE)
         .put(Wallet.update);
-    app.route(URL_WALLET_DELETE)
+    app.route(URI_REQUEST_WALLET_DELETE)
         .delete(Wallet.delete);
 }

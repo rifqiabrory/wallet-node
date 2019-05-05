@@ -6,12 +6,12 @@ module.exports = (sequelize,DataType) => {
             autoIncrement:true,
             primaryKey:true,
         },
-        AnDebit:{
+        anDebit:{
             field:'an_debit',
             type:DataType.INTEGER,
             allowNull:true
         },
-        AnCredit:{
+        anCredit:{
             field:'an_credit',
             type:DataType.INTEGER,
             allowNull:true
