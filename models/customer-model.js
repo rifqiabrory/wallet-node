@@ -42,5 +42,5 @@ module.exports = (sequelize,DataType) => {
         return bcrypt.compareSync(password,this.localPassword);
     }
 
-    return Customer
+    return Customer;
 }
