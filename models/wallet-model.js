@@ -9,7 +9,8 @@ module.exports = (sequelize,DataType) => {
         description:{
             field:'description',
             type:DataType.STRING,
-            required:true
+            required:true,
+            allowNull:false
         },
         createdDate:{
             field:'created_date',

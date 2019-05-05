@@ -8,13 +8,22 @@ module.exports = (sequelize,DataType) => {
         },
         accountName:{
             field:'account_name',
-            type:DataType.STRING
+            type:DataType.STRING,
+            required:true
+        },
+        openDate:{
+            field:'open_date',
+            type:DataType.DATE
         },
         balance:{
             field:'balance',
-            type:DataType.DECIMAL
+            type:DataType.DECIMAL,
+            required:true
+        },
+        customerNumber:{
+            field:'customer_number',
+            type:DataType.INTEGER
         }
-
     },{
         tableName:'tbl_account',
         timestamps:false
