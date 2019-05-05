@@ -1,127 +1,46 @@
+const bcrypt = require('bcrypt');
 module.exports = (sequelize,DataType) => {
     const Customer = sequelize.define('Customer', {
         customerNumber:{
-            field:'customerNumber',
+            field:'customer_number',
             type:DataType.INTEGER,
             primaryKey:true,
             autoIncrement:true
         },
-        fullName:{
-            field:'fullName',
+        firstName:{
+            field:'firstname',
+            type:DataType.STRING
+        },
+        lastName:{
+            field:'lastname',
             type:DataType.STRING
         },
         birthDate:{
-            field:'birthDate',
+            field:'birthdate',
             type:DataType.DATEONLY
         },
-        motherName:{
-            field:'motherName',
-            type:DataType.STRING
-        },
-        identityCardType:{
-            field:'identityCardType',
-            type:DataType.ENUM,
-            values:['ID Card','Driving License','Student Card','Passport']
-        },
-        noIdCard:{
-            field:'noIdCard',
-            type:DataType.BIGINT
-        },
-        address:{
-            field:'address',
-            type:DataType.STRING
-        },
-        phoneNumber:{
-            field:'phoneNumber',
-            type:DataType.INTEGER
-        },
-        gender:{
-            field:'gender',
-            type:DataType.ENUM,
-            values:['Male','Female']
-        },
-        citizenship:{
-            field:'citizenship',
-            type:DataType.STRING
-        },
-        npwp:{
-            field:'npwp',
-            type:DataType.BIGINT
-        },
-        maritalStatus:{
-            field:'maritalStatus',
-            type:DataType.ENUM,
-            values:['Single','Married','Widow(er)']
-        },
-        religion:{
-            field:'religion',
-            type:DataType.ENUM,
-            values:['Islam','Kristen','Katolik','Hindu','Budha','Kong Hu Cu']
-        },
-        education:{
-            field:'education',
-            type:DataType.STRING,
-            values:['SMA','Diploma','S1','S2','S3']
-        },
-        houseStatus:{
-            field:'houseStatus',
-            type:DataType.STRING
-        },
-        email:{
-            field:'email',
+        username:{
+            field:'username',
             type:DataType.STRING
         },
         password:{
             field:'password',
-            type:DataType.STRING
-        },
-        companyName:{
-            field:'companyName',
-            type:DataType.STRING
-        },
-        natureOfBusiness:{
-            field:'natureOfBusiness',
-            type:DataType.STRING
-        },
-        title:{
-            field:'title',
-            type:DataType.STRING
-        },
-        department:{
-            field:'department',
-            type:DataType.STRING
-        },
-        startDate:{
-            field:'startDate',
-            type:DataType.DATEONLY
-        },
-        income:{
-            field:'income',
-            type:DataType.DECIMAL
-        },
-        currentOccup:{
-            field:'currentOccupation',
-            type:DataType.STRING
-        },
-        employStatus:{
-            field:'employmentStatus',
-            type:DataType.STRING
-        },
-        reason:{
-            field:'reason',
-            type:DataType.TEXT
-        },
-        companyAddress:{
-            field:'companyAddress',
-            type:DataType.STRING
-        },
-        companyPhone:{
-            field:'companyPhone',
-            type:DataType.INTEGER
+            type:DataType.STRING,
+            required:true,
+            len:[5,10]
         }
     },{
         tableName:'tbl_customer',
         timestamps:false
     });
+    
+    Customer.generateHash = function(password){
+        return bcrypt.hashSync(password,bcrypt.genSaltSync(10),null);
+    }
+
+    Customer.prototype.validPassword = function(password){
+        return bcrypt.compareSync(password,this.localPassword);
+    }
+
     return Customer
 }

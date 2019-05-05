@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const CustomerModel = require('../models/customer-model');
 const AccountModel = require('../models/account-model');
 
-const sequelize = new Sequelize('db_wallet', 'root', 'root', {
+const sequelize = new Sequelize('e_wallet', 'root', 'root', {
   host: 'localhost',
   dialect: 'mysql',
   pool: {
@@ -17,8 +17,8 @@ const sequelize = new Sequelize('db_wallet', 'root', 'root', {
 const Customer = CustomerModel(sequelize, Sequelize);
 const Account = AccountModel(sequelize, Sequelize);
 
-Account.belongsTo(Customer, {foreignKey:'customerNumber'});
-Customer.hasMany(Account, {foreignKey:'customerNumber', as:'account'});
+Account.belongsTo(Customer, {foreignKey:'customer_number'});
+Customer.hasMany(Account, {foreignKey:'customer_number', as:'account'});
 
 
 module.exports = {
