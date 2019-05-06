@@ -1,19 +1,7 @@
 const { Customer, Account } = require('../utils/sequelize');
 const bcrypt = require('bcrypt');
-function getAll(callback, filter) {
-    //console.log(`Filter : ${JSON.stringify(filter)}`);
-    Customer.findAll({
-        include: [{
-            model: Account,
-            as: 'account'
-        }],
-        where: filter
-    }).then(
-        (customers) => {
-            callback(null, customers);
-        }
-    )
-}
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op
 
 function detailCustomer(customerNumber, callback) {
     Customer.findOne({
@@ -57,20 +45,21 @@ function updateCustomer(customerNumber, data, callback) {
         )
 }
 
-function remove(customerNumber, callback) {
-    Customer.destroy({
-        where: { customerNumber: customerNumber }
+function customerLogin(username,password,callback){
+    Customer.findOne({
+        where:{
+            [Op.and]:[{username:username},{password:password}]
+        }
     }).then(
         (customer) => {
-            callback(null, customer);
+            callback(null,customer);
         }
     )
 }
 
 module.exports = {
-    getAll,
     detailCustomer,
     insert,
     updateCustomer,
-    remove
+    customerLogin
 };

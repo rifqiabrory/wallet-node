@@ -4,17 +4,14 @@ module.exports = function (app) {
     const URI_REQUEST_NEW_CUSTOMER = '/customer';
     const URI_REQUEST_CUSTOMER_DETAIL = '/customer/:customerNumber';
     const URI_REQUEST_CUSTOMER_UPDATE = '/customer/:customerNumber';
-    const URI_REQUEST_CUSTOMER_DELETE = '/customer/:customerNumber';
-    const URI_REQUEST_CUSTOMERS_LIST = '/customers';
+    const URI_REQUEST_CUSTOMERS_LOGIN = '/login';
     // set route
-    app.route(URI_REQUEST_CUSTOMERS_LIST)
-        .get(Customer.lists);
     app.route(URI_REQUEST_CUSTOMER_DETAIL)
         .get(Customer.detail);
     app.route(URI_REQUEST_NEW_CUSTOMER)
         .post(Customer.create);
     app.route(URI_REQUEST_CUSTOMER_UPDATE)
         .put(Customer.update);
-    app.route(URI_REQUEST_CUSTOMER_DELETE)
-        .delete(Customer.delete);
+    app.route(URI_REQUEST_CUSTOMERS_LOGIN)
+        .post(Customer.login);
 }
