@@ -1,5 +1,15 @@
 const { Transaction, Account, TransactionType } = require('../utils/sequelize');
 
+function lists(accountNumber, callback) {
+    Transaction.findAll({
+        where: {accountNumber : accountNumber}
+    }).then(
+        (transactions) => {
+            callback(null,transactions);
+        }
+    )
+}
+
 function newTopUp(data, callback) {
     getBalance(data.anCredit, function (balance) {
         const result = balance + data.amount;
@@ -23,6 +33,7 @@ function newWithdraw(data, callback) {
         const result = balance - data.amount;
         updateBalance(data.anDebit, result);
     })
+
     Transaction.create({
         anCredit: 0,
         anDebit: data.anDebit,
@@ -75,6 +86,7 @@ function updateBalance(accountNumber, result) {
 }
 
 module.exports = {
+    lists,
     newTopUp,
     newWithdraw,
     newTransfer

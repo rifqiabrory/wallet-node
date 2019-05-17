@@ -1,7 +1,16 @@
-const { Wallet } = require('../utils/sequelize');
+const { Wallet ,Account} = require('../utils/sequelize');
 
 function walletsByAccountNumber(accountNumber, callback) {
-
+    Wallet.findAll({
+        include:{
+            model: Account
+        },
+        where: {account_number : accountNumber}
+    }).then(
+        (wallets) => {
+            callback(null,wallets);
+        }
+    )
 }
 
 function detailWallet(idWallet, callback) {
@@ -15,9 +24,10 @@ function detailWallet(idWallet, callback) {
 }
 
 function insert(data, callback) {
+    let accountNumber = data.account.accountNumber;
     Wallet.create({
         description: data.description,
-        customerNumber: data.customerNumber
+        account_number: accountNumber
     }).then(
         (wallet) => {
             callback(null, wallet);

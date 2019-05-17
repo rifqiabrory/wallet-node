@@ -26,7 +26,7 @@ function Exists(res, data, status, message) {
 }
 
 function NotFound(res, data, status, message) {
-    const notFoundCode = status ? status : "401";
+    const notFoundCode = status ? status : "444";
     const notFoundMessage = message ? message : "Data Not Found";
 
     Success(res, data, notFoundCode, notFoundMessage);

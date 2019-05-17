@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 module.exports = (sequelize,DataType) => {
-    const Customer = sequelize.define('Customer', {
+    const Customer = sequelize.define('customer', {
         customerNumber:{
             field:'customer_number',
             type:DataType.INTEGER,

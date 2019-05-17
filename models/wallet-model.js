@@ -15,10 +15,6 @@ module.exports = (sequelize,DataType) => {
         createdDate:{
             field:'created_date',
             type:DataType.DATE
-        },
-        accountNumber:{
-            field:'account_number',
-            type:DataType.INTEGER
         }
     },{
         tableName:'tbl_wallet',

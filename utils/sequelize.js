@@ -32,6 +32,9 @@ const TransactionType = TransactionTypeModel(sequelize, Sequelize);
 Account.belongsTo(Customer, {foreignKey:'customer_number'});
 Customer.hasMany(Account, {foreignKey:'customer_number', as:'account'});
 
+Wallet.belongsTo(Account, {foreignKey:'account_number'});
+Account.hasMany(Wallet, {foreignKey:'account_number'});
+
 //exports all models
 module.exports = {
     Customer,

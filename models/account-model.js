@@ -1,5 +1,5 @@
 module.exports = (sequelize,DataType) => {
-    const Account = sequelize.define('Account', {
+    const Account = sequelize.define('account', {
         accountNumber:{
             field:'account_number',
             type:DataType.INTEGER,
@@ -19,10 +19,6 @@ module.exports = (sequelize,DataType) => {
             field:'balance',
             type:DataType.DECIMAL,
             required:true
-        },
-        customerNumber:{
-            field:'customer_number',
-            type:DataType.INTEGER
         }
     },{
         tableName:'tbl_account',

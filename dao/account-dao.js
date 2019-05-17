@@ -1,7 +1,16 @@
-const { Account } = require('../utils/sequelize');
+const { Account, Customer } = require('../utils/sequelize');
 
 function accountsByCustomerNumber(customerNumber, callback) {
-
+    Account.findAll({
+        include:{
+            model: Customer
+        },
+        where: {customer_number : customerNumber}
+    }).then(
+        (accounts) => {
+            callback(null,accounts);
+        }
+    )
 }
 
 function detailAccount(accountNumber, callback) {
@@ -15,10 +24,11 @@ function detailAccount(accountNumber, callback) {
 }
 
 function insert(data, callback) {
+    let customerNumber = data.customer.customerNumber;
     Account.create({
         accountName: data.accountName,
         balance: data.balance,
-        customerNumber: data.customerNumber
+        customer_number: customerNumber
     }).then(
         (account) => {
             callback(null, account);
